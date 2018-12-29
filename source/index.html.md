@@ -31,7 +31,7 @@ Though, an ERC gives you some technical guidelines to work with and implement sm
 We have language bindings in Solidity and NodeJS! 
 
 
-You can create your smart contracts using [MyContract](https://mycontract.co/). Feel free to edit it and use it as a base for your own Smart Contract Creation, Deployment, Interaction and Token Offering.
+You can create your smart contracts using [MyContract](https://mycontract.co). Feel free to edit it and use it as a base for your own Smart Contract Creation, Deployment, Interaction and Token Offering.
 
 # Authentication
 
@@ -55,7 +55,7 @@ You must replace <code>04af606c-38a3-11e8-b467-0ed5f89f718b</code> with your per
 
 ## adminSignup
 
-`POST https://api.mycontract.co/api/adminSignup`
+`POST https://api.mycontract.co:3001/api/adminSignup`
 
 Creates a new admin account. 
 
@@ -63,7 +63,7 @@ Creates a new admin account.
 require "uri"
 require "net/http"
 
-url = URI("https://api.mycontract.co/api/adminSignup")
+url = URI("https://api.mycontract.co:3001/api/adminSignup")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -82,7 +82,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/adminSignup',
   'headers': {
   }
@@ -117,7 +117,7 @@ req.end();
 
 ```shell
 
-curl --location --request POST "api.mycontract.co/api/adminSignup" \
+curl --location --request POST "api.mycontract.co:3001/api/adminSignup" \
   --form "email=xyz@gmail.com" \
   --form "password=Xyz123" \
   --form "firstName=Xyz" \
@@ -126,7 +126,7 @@ curl --location --request POST "api.mycontract.co/api/adminSignup" \
 
 ```python
 import requests
-url = 'api.mycontract.co/api/adminSignup'
+url = 'api.mycontract.co:3001/api/adminSignup'
 payload = {'email': 'xyz@gmail.com',
 'password': 'Xyz123',
 'firstName': 'Xyz',
@@ -144,7 +144,7 @@ print(response.text)
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/adminSignup",
+  CURLOPT_URL => "api.mycontract.co:3001/api/adminSignup",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -182,7 +182,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/adminSignup"
+  url := "api.mycontract.co:3001/api/adminSignup"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -218,10 +218,8 @@ func main() {
 
 ```json
 {
-  "email": "xyz@gmail.com",
-  "password": "Xyz123",
-  "firstName": "Xyz",
-  "lastName": "azoor"
+    "status": true,
+    "info": "Please verify your email address by clicking the link that we have mailed you!"
 }
 ```
 
@@ -240,7 +238,7 @@ includes:
 
 ## Admin Login
 
-`POST https://api.mycontract.co/api/adminLogin`
+`POST https://api.mycontract.co:3001/api/adminLogin`
 
 On Sign In Admin is issued JWT tokens.
 
@@ -248,7 +246,7 @@ On Sign In Admin is issued JWT tokens.
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/api/adminLogin")
+url = URI("api.mycontract.co:3001/api/adminLogin")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -267,7 +265,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/adminLogin',
   'headers': {
   }
@@ -301,14 +299,14 @@ req.end();
 ```
 
 ```shell
-curl --location --request POST "api.mycontract.co/api/adminLogin" \
+curl --location --request POST "api.mycontract.co:3001/api/adminLogin" \
   --form "email=xyz@gmail.com" \
   --form "password=Xyz123"
   ```
 
 ```python
 import requests
-url = 'api.mycontract.co/api/adminLogin'
+url = 'api.mycontract.co:3001/api/adminLogin'
 payload = {'email': 'xyz@gmail.com',
 'password': 'Xyz123'}
 files = {}
@@ -325,7 +323,7 @@ print(response.text)
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/adminLogin",
+  CURLOPT_URL => "api.mycontract.co:3001/api/adminLogin",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -363,7 +361,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/adminLogin"
+  url := "api.mycontract.co:3001/api/adminLogin"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -397,8 +395,8 @@ func main() {
 
 ```json
 {
-  "email": "xyz@gmail.com",
-  "password": "Xyz123"
+  "token":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxNjA3Mzc1MC0wOWQwLTExZTktOGZmZC1iMWIwZWU5M2FjNDciLCJpYXQiOjE1NDU5MTI3NzcsImV4cCI6MTU0NTkxNDU3N30.BQNpIcINTte5fIDbARi6TR_cQTVfqjlWAE9H5Cr4_4Q"
+ 
 }
 ```
 
@@ -410,184 +408,16 @@ email | String | yes
 password | password | yes
 
 
-## payment for Admin
-
-`POST https://api.mycontract.co/api/paymentforAdmin`
-
-Payment for admin generates OTP for secured transaction.
-
-
-```ruby
-require "uri"
-require "net/http"
-
-url = URI("api.mycontract.co/api/paymentforAdmin")
-
-http = Net::HTTP.new(url.host, url.port)
-
-request = Net::HTTP::Post.new(url)
-request["content-type"] = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
-request.body = "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"otpValue\"\r\n\r\n8379\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"
-
-response = http.request(request)
-puts response.read_body
-```
-
-```javascript
-var https = require('https');
-
-var options = {
-  'method': 'POST',
-  'hostname': 'api.mycontract.co',
-  'path': '/api/paymentforAdmin',
-  'headers': {
-  }
-};
-
-var req = https.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function (chunk) {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
-
-  res.on("error", function (error) {
-    console.error(error);
-  });
-});
-
-var postData = "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"otpValue\"\r\n\r\n8379\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--";
-
-req.setHeader('content-type', 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW');
-
-req.write(postData);
-
-req.end();
-
-```
-
-```shell
-curl --location --request POST "api.mycontract.co/api/paymentforAdmin" \
-  --form "otpValue=8379"
-  ```
-
-```python
-import requests
-url = 'api.mycontract.co/api/paymentforAdmin'
-payload = {'otpValue': '8379'}
-files = {}
-headers = {}
-response = requests.request('POST', url, headers = headers, data = payload, files = files, allow_redirects=False, timeout=undefined, allow_redirects=false)
-print(response.text)
-
-
-```
-
-```php
-<?php
-
-$curl = curl_init();
-
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/getClientData/uid/bd973760-fc4f-11e8-a1be-3b62c8107ed1",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => false,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
-));
-
-$response = curl_exec($curl);
-$err = curl_error($curl);
-
-curl_close($curl);
-
-if ($err) {
-  echo "cURL Error #:" . $err;
-} else {
-  echo $response;
-} ?>
-```
-
-```go
-package main
-
-import (
-  "fmt"
-  "bytes"
-  "mime/multipart"
-  "os"
-  "path/filepath"
-  "net/http"
-  "io/ioutil"
-)
-
-func main() {
-
-  url := "api.mycontract/api/paymentforAdmin"
-  method := "POST"
-
-  payload := &bytes.Buffer{}
-  writer := multipart.NewWriter(payload)
-  _ = writer.WriteField("otpValue", "8379")
-  err := writer.Close()
-  if err != nil {  fmt.Println(err)}
-
-
-  client := &http.Client {
-    CheckRedirect: func(req *http.Request, via []*http.Request) error {
-      return http.ErrUseLastResponse
-    },
-  }
-  req, err := http.NewRequest(method, url, payload)
-
-  if err != nil {
-    fmt.Println(err)
-  }
-  req.Header.Set("Content-Type", writer.FormDataContentType())
-  res, err := client.Do(req)
-  defer res.Body.Close()
-  body, err := ioutil.ReadAll(res.Body)
-
-  fmt.Println(string(body))
-}
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "otpValue": "8379",
-  
-}
-```
-
-### Query Parameters
-
-Argument | Type | Required
---------- | ------- | -----------
-otpValue | Number | yes
-
-
-
-
 
 ## admin KYC upload
 
-`POST https://api.mycontract.co/api/adminKYCupload`
+`POST https://api.mycontract.co:3001/api/adminKYCupload`
 
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/api/adminKYCupload")
+url = URI("api.mycontract.co:3001/api/adminKYCupload")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -604,7 +434,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/adminKYCupload',
   'headers': {
   }
@@ -638,7 +468,7 @@ req.end();
 ```
 
 ```shell
-curl --location --request POST "api.mycontract.co/api/adminKYCupload" \
+curl --location --request POST "api.mycontract.co:3001/api/adminKYCupload" \
   --form "email=xyz@gmail.com" \
   --form "firstName=xyz" \
   --form "lastName=azoor" \
@@ -654,7 +484,7 @@ curl --location --request POST "api.mycontract.co/api/adminKYCupload" \
 
 ```python
 import requests
-url = 'api.mycontract.co/api/adminKYCupload'
+url = 'api.mycontract.co:3001/api/adminKYCupload'
 payload = {'email': 'xyz@gmail.com',
 'firstName': 'xyz',
 'lastName': 'azoor',
@@ -676,7 +506,7 @@ print(response.text)
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/adminKYCupload",
+  CURLOPT_URL => "api.mycontract.co:3001/api/adminKYCupload",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -714,7 +544,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/adminKYCupload"
+  url := "api.mycontract.co:3001/api/adminKYCupload"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -769,18 +599,8 @@ func main() {
 
 ```json
 {
-  "email": "xyz@gmail.com",
-  "firstName": "Xyz",
-  "lastName": "azoor",
-  "ISDCode": "+91",
-  "contactNumber": "9952526390",
-  "KYCDoc1": "",
-  "KYCDoc2": "",
-  "KYCDoc3": "",
-  "KYCDocName1": "",
-  "KYCDocName2": "",
-  "KYCDocName3": ""
-
+    "status": true,
+    "message": "KYC submitted successfully"
 }
 ```
 
@@ -803,13 +623,13 @@ KYCDocName3 | | yes
 
 ## admin Balance
 
-`GET https://api.mycontract.co/api/adminBalance`
+`GET https://api.mycontract.co:3001/api/adminBalance`
 
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/api/adminBalance")
+url = URI("api.mycontract.co:3001/api/adminBalance")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -824,7 +644,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/adminBalance',
   'headers': {
   }
@@ -852,14 +672,14 @@ req.end();
 ```
 
 ```shell
-curl --location --request GET "api.mycontract.co/api/adminBalance"
+curl --location --request GET "api.mycontract.co:3001/api/adminBalance"
 
 
   ```
 
 ```python
 import requests
-url = 'api.mycontract.co/api/adminBalance'
+url = 'api.mycontract.co:3001/api/adminBalance'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -874,7 +694,7 @@ print(response.text)
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/adminBalance",
+  CURLOPT_URL => "api.mycontract.co:3001/api/adminBalance",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -909,7 +729,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/adminBalance"
+  url := "api.mycontract.co:3001/api/adminBalance"
   method := "GET"
 
   client := &http.Client {
@@ -929,18 +749,25 @@ func main() {
   fmt.Println(string(body))
 }
 ```
+> The above command returns JSON structured like this:
 
+```json
+{
+    "ETHBalance": "0",
+    "tokenBalance": 0
+}
 
+```
 
 ## client Data  
 
-`GET https://api.mycontract.co/api/clientList`
+`GET https://api.mycontract.co:3001/api/clientList`
 
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/api/clientList")
+url = URI("api.mycontract.co:3001/api/clientList")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -956,7 +783,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/clientList',
   'headers': {
   }
@@ -983,14 +810,14 @@ var req = https.request(options, function (res) {
 ```
 
 ```shell
-curl --location --request GET "api.mycontract.co/api/clientList"
+curl --location --request GET "api.mycontract.co:3001/api/clientList"
 
 
   ```
 
 ```python
 import requests
-url = 'api.mycontract.co/api/clientList'
+url = 'api.mycontract.co:3001/api/clientList'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -1006,7 +833,7 @@ print(response.text)
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/clientList",
+  CURLOPT_URL => "api.mycontract.co:3001/api/clientList",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -1041,7 +868,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/clientList"
+  url := "api.mycontract.co:3001/api/clientList"
   method := "GET"
 
   client := &http.Client {
@@ -1066,14 +893,14 @@ func main() {
 
 ## update Client KYC Data
 
-`POST https://api.mycontract.co/api/updateClientKYCData/uid/80bafd60-044a-11e9-b109-9bf6dd27fbd4`
+`POST https://api.mycontract.co:3001/api/updateClientKYCData/uid/80bafd60-044a-11e9-b109-9bf6dd27fbd4`
 
 
 
 
 
 ```shell
-curl --location --request POST "api.mycontract.co/api/updateClientKYCData/uid/80bafd60-044a-11e9-b109-9bf6dd27fbd4" \
+curl --location --request POST "api.mycontract.co:3001/api/updateClientKYCData/uid/80bafd60-044a-11e9-b109-9bf6dd27fbd4" \
   --form "kycStatus=false" \
   --form "accountStatus=active"
   ```
@@ -1081,7 +908,7 @@ curl --location --request POST "api.mycontract.co/api/updateClientKYCData/uid/80
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/api/updateClientKYCData/uid/80bafd60-044a-11e9-b109-9bf6dd27fbd4")
+url = URI("api.mycontract.co:3001/api/updateClientKYCData/uid/80bafd60-044a-11e9-b109-9bf6dd27fbd4")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -1097,7 +924,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/updateClientKYCData/uid/80bafd60-044a-11e9-b109-9bf6dd27fbd4',
   'headers': {
   }
@@ -1131,7 +958,7 @@ req.end();
 ```
 ```python
 import requests
-url = 'api.mycontract.co/api/updateClientKYCData/uid/80bafd60-044a-11e9-b109-9bf6dd27fbd4'
+url = 'api.mycontract.co:3001/api/updateClientKYCData/uid/80bafd60-044a-11e9-b109-9bf6dd27fbd4'
 payload = {'kycStatus': 'false',
 'accountStatus': 'active'}
 files = {}
@@ -1147,7 +974,7 @@ print(response.text)
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/updateClientKYCData/uid/80bafd60-044a-11e9-b109-9bf6dd27fbd4",
+  CURLOPT_URL => "api.mycontract.co:3001/api/updateClientKYCData/uid/80bafd60-044a-11e9-b109-9bf6dd27fbd4",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -1185,7 +1012,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/updateClientKYCData/uid/80bafd60-044a-11e9-b109-9bf6dd27fbd4"
+  url := "api.mycontract.co:3001/api/updateClientKYCData/uid/80bafd60-044a-11e9-b109-9bf6dd27fbd4"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -1234,7 +1061,7 @@ accountState | String | yes
 
 ## admin Logout
 
-`GET https://api.mycontract.co/api/adminLogout`
+`GET https://api.mycontract.co:3001/api/adminLogout`
 
 
 
@@ -1242,7 +1069,7 @@ accountState | String | yes
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/adminLogout")
+url = URI("api.mycontract.co:3001/adminLogout")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -1255,7 +1082,7 @@ puts response.read_body
 
 
 ```shell
-curl --location --request GET "api.mycontract.co/adminLogout"
+curl --location --request GET "api.mycontract.co:3001/adminLogout"
 
 
 
@@ -1263,7 +1090,7 @@ curl --location --request GET "api.mycontract.co/adminLogout"
 
 ```python
 import requests
-url = 'api.mycontract.co/adminLogout'
+url = 'api.mycontract.co:3001/adminLogout'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -1277,7 +1104,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/adminLogout',
   'headers': {
   }
@@ -1313,7 +1140,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/adminLogout",
+  CURLOPT_URL => "api.mycontract.co:3001/adminLogout",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -1347,7 +1174,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/adminLogout"
+  url := "api.mycontract.co:3001/adminLogout"
   method := "GET"
 
   client := &http.Client {
@@ -1368,14 +1195,21 @@ func main() {
 }
 
 ```
+> The above command returns JSON structured like this:
 
+```json
+{
+    "status": true,
+    "message": "successfully signout"
+}
+```
 ## Get Balances
 
-`GET https://api.mycontract.co/api/getBalances`
+`GET https://api.mycontract.co:3001/api/getBalances`
 
 ```shell
 
-curl --location --request GET "api.mycontract.co/getBalances"
+curl --location --request GET "api.mycontract.co:3001/getBalances"
 
 ```
 
@@ -1383,7 +1217,7 @@ curl --location --request GET "api.mycontract.co/getBalances"
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/getBalances")
+url = URI("api.mycontract.co:3001/getBalances")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -1395,7 +1229,7 @@ puts response.read_body
 ```python
 
 import requests
-url = 'api.mycontract.co/getBalances'
+url = 'api.mycontract.co:3001/getBalances'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -1408,7 +1242,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/getBalances',
   'headers': {
   }
@@ -1439,7 +1273,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/getBalances",
+  CURLOPT_URL => "api.mycontract.co:3001/getBalances",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -1474,7 +1308,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/getBalances"
+  url := "api.mycontract.co:3001/getBalances"
   method := "GET"
 
   client := &http.Client {
@@ -1495,11 +1329,20 @@ func main() {
 }
 ```
 
+> The above command returns JSON structured like this:
+
+```json
+{
+    "XDCE": 0,
+    "ETH": "0"
+}
+```
+
 # Client Profile Related APIs
 
 ## Login
 
-`POST http://api.mycontract.co/api/login`
+`POST http://api.mycontract.co:3001/api/login`
 
 ```ruby
 require "uri"
@@ -1596,7 +1439,7 @@ func main() {
 
 ```python
 import requests
-url = 'api.mycontract.co/api/login'
+url = 'api.mycontract.co:3001/api/login'
 payload = {'email': 'demo@xinfin.org',
 'password': 'Wht@1234'}
 files = {}
@@ -1607,7 +1450,7 @@ print(response.text)
 
 
 ```shell
-curl --location --request POST "api.mycontract.co/api/login" \
+curl --location --request POST "api.mycontract.co:3001/api/login" \
   --form "email=demo@gmail.com" \
   --form "password=Wht@1234"
 ```
@@ -1656,8 +1499,8 @@ req.end();
 
 ```json
 {
-  "email": "demo@gmail.com",
-  "password": "Wht@1234"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMDllZTUxMC0wOWQ2LTExZTktYWZlZC01YmI0NDc0NTFlNTUiLCJpYXQiOjE1NDU5MTU2MTksImV4cCI6MTU0NTkxNzQxOX0.K4HlqOcIojZ4_0bm2QGhp66H9AuKo0lRC_pR3rIgVnU"
+  
 }
 ```
 ### Query Parameters
@@ -1676,7 +1519,7 @@ Remember — You must login first to access users APIs.
 
 ## Sign Up
 
-`POST http://api.mycontract.co/api/adminId/965a81c0-0505-11e9-9fb9-d56ad143a4b6/signup`
+`POST http://api.mycontract.co:3001/api/adminId/965a81c0-0505-11e9-9fb9-d56ad143a4b6/signup`
 
 
 ```ruby
@@ -1828,10 +1671,8 @@ curl --location --request POST "api.mycontract/api/adminId/51923ed0-fed8-11e8-a6
 
 ```json
 {
-  "fname": "abcd",
-  "lname": "xyz",
-  "email": "xyz@gmail.com",
-  "password": "Wht@1234"
+    "status": true,
+    "message": "signup successful"
 }
 ```
 
@@ -2074,7 +1915,7 @@ print(response.text)
 ```
 
 ```shell
-  curl --location --request GET "api.mycontract.co/icoDashboardSetup/project/demo"
+  curl --location --request GET "api.mycontract.co:3001/icoDashboardSetup/project/demo"
 ```
 
 ```javascript
@@ -2228,8 +2069,17 @@ req.end();
 
 ### HTTP Request
 
-`GET http://api.mycontract.co/api/logout/<ID>`
+`GET http://api.mycontract.co:3001/api/logout/<ID>`
 
+> The above command returns JSON structured like this:
+
+```json
+
+
+{
+    "message": true
+}
+```
 
 ##Client forgot password
 
@@ -2395,15 +2245,15 @@ req.end();
 
 ```json
 {
-  
-  "email": "abc@gmail.com"
+    "error": "email sent",
+    "status": true
 }
 ```
 
 
 ### HTTP Request
 
-`GET http://api.mycontract.co/api/forgotpassword/<ID>`
+`GET http://api.mycontract.co:3001/api/forgotpassword/<ID>`
 
 ### Query Parameters
 
@@ -2577,18 +2427,15 @@ req.end();
 
 ```json
 {
-  
-  "email": "abc@gmail.com",
-  "password": "12345",
-  "resetId": "$2a$08$jmtFYVH7ZVSBapiFZuEzoOOInSxjQkbPvmXaH2X7Gr1YBDk3du8n"
- 
+    "status": true,
+    "message": "password changed"
 }
 ```
 
 
 ### HTTP Request
 
-`GET http://api.mycontract.co/api/forgotpassword/<ID>`
+`GET http://api.mycontract.co:3001/api/forgotpassword/<ID>`
 
 ### Query Parameters
 
@@ -2729,15 +2576,14 @@ req.end();
 
 ### HTTP Request
 
-`GET http://api.mycontract.co/api/checkExistence/<ID>`
+`GET http://api.mycontract.co:3001/api/checkExistence/<ID>`
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  
-  "email": "abc@gmail.com"
-
+    "status": false,
+    "message": "Account Already Exists"
 }
 ```
 ### Query Parameters
@@ -2747,7 +2593,7 @@ Argument | Type | Required
 email | String | yes
 
 ##Client KYC document Upload
- `POST http://api.mycontract.co/api/KYCdocUpload`
+ `POST http://api.mycontract.co:3001/api/KYCdocUpload`
 
 ```ruby
 require "uri"
@@ -2765,7 +2611,7 @@ response = http.request(request)
 puts response.read_body
 ```
 ```shell
-curl --location --request POST "api.mycontract.co/api/KYCdocUpload" \
+curl --location --request POST "api.mycontract.co:3001/api/KYCdocUpload" \
   --form "email=xyz@gmail.com" \
   --form "firstName=Xyz" \
   --form "lastName=azoor" \
@@ -2780,7 +2626,7 @@ curl --location --request POST "api.mycontract.co/api/KYCdocUpload" \
 ```
 ```python
 import requests
-url = 'api.mycontract.co/api/KYCdocUpload'
+url = 'api.mycontract.co:3001/api/KYCdocUpload'
 payload = {'email': 'xyzz@gmail.com',
 'firstName': 'Xyz',
 'lastName': 'azoor',
@@ -2801,7 +2647,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/KYCdocUpload',
   'headers': {
   }
@@ -2838,7 +2684,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/KYCdocUpload",
+  CURLOPT_URL => "api.mycontract.co:3001/api/KYCdocUpload",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -2876,7 +2722,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/KYCdocUpload"
+  url := "api.mycontract.co:3001/api/KYCdocUpload"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -2930,7 +2776,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/buyFirstPackage"
+  url := "api.mycontract.co:3001/buyFirstPackage"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -2970,22 +2816,8 @@ func main() {
 
 ```json
 {
-  
-  "email": "abc@gmail.com",
-   "firstName": "abc",
-    "lastName": "def",
-     "ISDCode": "+91",
-      "contactNumber": "9865986530",
-       "KYCDoc1": "",
-       "KYCDoc2": "",
-       "KYCDoc3": "",
-       "KYCDocName1": "",
-       "KYCDocName2": "",
-
-       "KYCDocName3": ""
-
-
-
+    "status": true,
+    "m-ssage": "KYC submitted"
 }
 ```
 
@@ -3007,16 +2839,16 @@ KYCDocName3 | | yes
 
 ## Get Balances
 
-`GET http://api.mycontract.co/api/getBalances`
+`GET http://api.mycontract.co:3001/api/getBalances`
 
 ```shell
-curl --location --request GET "api.mycontract.co/getBalances"
+curl --location --request GET "api.mycontract.co:3001/getBalances"
 ```
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/getBalances")
+url = URI("api.mycontract.co:3001/getBalances")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -3027,7 +2859,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/getBalances'
+url = 'api.mycontract.co:3001/getBalances'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -3038,7 +2870,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/getBalances',
   'headers': {
   }
@@ -3070,7 +2902,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/getBalances",
+  CURLOPT_URL => "api.mycontract.co:3001/getBalances",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -3104,7 +2936,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/getBalances"
+  url := "api.mycontract.co:3001/getBalances"
   method := "GET"
 
   client := &http.Client {
@@ -3124,21 +2956,28 @@ func main() {
   fmt.Println(string(body))
 }
 ```
+> The above command returns JSON structured like this:
 
+```json
+{
+    "XDCE": 0,
+    "ETH": "0"
+}
+```
 
 ## First Package Payment
 
-`GET http://api.mycontract.co/api/buyFirstPackage`
+`GET http://api.mycontract.co:3001/api/buyFirstPackage`
 
 ```shell
-curl --location --request POST "api.mycontract.co/buyFirstPackage" \
+curl --location --request POST "api.mycontract.co:3001/buyFirstPackage" \
   --form "otpValue=8027"
 ```
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/buyFirstPackage")
+url = URI("api.mycontract.co:3001/buyFirstPackage")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -3151,7 +2990,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/buyFirstPackage'
+url = 'api.mycontract.co:3001/buyFirstPackage'
 payload = {'otpValue': '8027'}
 files = {}
 headers = {}
@@ -3163,7 +3002,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/buyFirstPackage',
   'headers': {
   }
@@ -3201,7 +3040,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/buyFirstPackage",
+  CURLOPT_URL => "api.mycontract.co:3001/buyFirstPackage",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -3238,7 +3077,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/buyFirstPackage"
+  url := "api.mycontract.co:3001/buyFirstPackage"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -3270,8 +3109,7 @@ func main() {
 
 ```json
 {
-  
-  "otpValue": "8027"
+    "status": true
 }
 ```
 
@@ -3287,10 +3125,10 @@ otpValue | Number | yes
 
 ## Create ERC20 Contract 
 
-`POST http://api.mycontract.co/api/createERC20Contract`
+`POST http://api.mycontract.co:3001/api/createERC20Contract`
 
 ```shell
-curl --location --request POST "api.mycontract.co/api/createERC20Contract" \
+curl --location --request POST "api.mycontract.co:3001/api/createERC20Contract" \
   --form "tokenName=Demo" \
   --form "tokenSymbol=Dmo" \
   --form "tokenDecimals=18" \
@@ -3306,7 +3144,7 @@ curl --location --request POST "api.mycontract.co/api/createERC20Contract" \
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/api/createERC20Contract")
+url = URI("api.mycontract.co:3001/api/createERC20Contract")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -3320,7 +3158,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/api/createERC20Contract'
+url = 'api.mycontract.co:3001/api/createERC20Contract'
 payload = {'tokenName': 'Demo',
 'tokenSymbol': 'Dmo',
 'tokenDecimals': '18',
@@ -3342,7 +3180,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/createERC20Contract',
   'headers': {
   }
@@ -3380,7 +3218,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/createERC20Contract",
+  CURLOPT_URL => "api.mycontract.co:3001/api/createERC20Contract",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -3418,7 +3256,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/createERC20Contract"
+  url := "api.mycontract.co:3001/api/createERC20Contract"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -3459,17 +3297,7 @@ func main() {
 
 ```json
 {
-  
-  "tokenName": "Demo",
-  "tokenSymbol": "DMO",
-  "tokenDecimals": "18",
-  "tokenSupply": "100000",
-  "ethRate": "1",
-  "bonusRate": "0",
-  "isPausable":"true",
-"isBurnable":"true",
-"isMintable":"true",
-"isUpgradable":"true"
+   "Smart Contract is created."
 }
 ```
 ### Query Parameters
@@ -3490,10 +3318,10 @@ isUpgradable | String | yes
 
 ## Create ERC223 Contract 
 
-`POST http://api.mycontract.co/api/createERC223Contract`
+`POST http://api.mycontract.co:3001/api/createERC223Contract`
 
 ```shell
-curl --location --request POST "api.mycontract.co/api/createERC223Contract" \
+curl --location --request POST "api.mycontract.co:3001/api/createERC223Contract" \
   --form "tokenName=Demo" \
   --form "tokenSymbol=Dmo" \
   --form "tokenDecimals=18" \
@@ -3509,7 +3337,7 @@ curl --location --request POST "api.mycontract.co/api/createERC223Contract" \
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/api/createERC223Contract")
+url = URI("api.mycontract.co:3001/api/createERC223Contract")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -3523,7 +3351,7 @@ puts response.read_body
 
 ```python
 import requests
-url = 'api.mycontract.co/api/createERC223Contract'
+url = 'api.mycontract.co:3001/api/createERC223Contract'
 payload = {'tokenName': 'Demo',
 'tokenSymbol': 'Dmo',
 'tokenDecimals': '18',
@@ -3544,7 +3372,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/createERC223Contract',
   'headers': {
   }
@@ -3581,7 +3409,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/createERC223Contract",
+  CURLOPT_URL => "api.mycontract.co:3001/api/createERC223Contract",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -3618,7 +3446,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/createERC223Contract"
+  url := "api.mycontract.co:3001/api/createERC223Contract"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -3659,17 +3487,7 @@ func main() {
 
 ```json
 {
-  
-  "tokenName": "Demo",
-  "tokenSymbol": "DMO",
-  "tokenDecimals": "18",
-  "tokenSupply": "100000",
-  "ethRate": "1",
-  "bonusRate": "0",
-  "isPausable":"true",
-"isBurnable":"true",
-"isMintable":"true",
-"isUpgradable":"true"
+ "Smart Contract is created."
 }
 ```
 
@@ -3692,11 +3510,11 @@ isUpgradable | String | yes
 
 ## Create ERC721Contract 
 
-`POST http://api.mycontract.co/api/createERC721Contract`
+`POST http://api.mycontract.co:3001/api/createERC721Contract`
 
 
 ```shell
-curl --location --request POST "api.mycontract.co/api/createERC721Contract" \
+curl --location --request POST "api.mycontract.co:3001/api/createERC721Contract" \
   --form "tokenName=Demo" \
   --form "tokenSymbol=Dmo" \
   --form "isPausable=true" \
@@ -3709,7 +3527,7 @@ curl --location --request POST "api.mycontract.co/api/createERC721Contract" \
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/api/createERC721Contract")
+url = URI("api.mycontract.co:3001/api/createERC721Contract")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -3723,7 +3541,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/api/createERC721Contract'
+url = 'api.mycontract.co:3001/api/createERC721Contract'
 payload = {'tokenName': 'Demo',
 'tokenSymbol': 'Dmo',
 'isPausable': 'true',
@@ -3740,7 +3558,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/createERC721Contract',
   'headers': {
   }
@@ -3777,7 +3595,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/createERC721Contract",
+  CURLOPT_URL => "api.mycontract.co:3001/api/createERC721Contract",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -3815,7 +3633,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/createERC721Contract"
+  url := "api.mycontract.co:3001/api/createERC721Contract"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -3851,12 +3669,7 @@ func main() {
 
 ```json
 {
-  
-  "tokenName": "Demo",
-  "tokenSymbol": "DMO",
-"isPausable":"true",
-"isBurnable":"true",
-"isOwnable":"true"
+   "Smart Contract is created."
 }
 ```
 
@@ -3874,11 +3687,11 @@ isOwnable | String | yes
 
 ## Automatic Deployer 
 
-`POST http://api.mycontract.co/api/automaticDeployer`
+`POST http://api.mycontract.co:3001/api/automaticDeployer`
 
 
 ```shell
-curl --location --request POST "api.mycontract.co/api/automaticDeployer" \
+curl --location --request POST "api.mycontract.co:3001/api/automaticDeployer" \
   --form "coinName=Demo" \
   --form "network=testnet"
   ```
@@ -3887,7 +3700,7 @@ curl --location --request POST "api.mycontract.co/api/automaticDeployer" \
   require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/api/automaticDeployer")
+url = URI("api.mycontract.co:3001/api/automaticDeployer")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -3900,7 +3713,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/api/automaticDeployer'
+url = 'api.mycontract.co:3001/api/automaticDeployer'
 payload = {'coinName': 'Demo',
 'network': 'testnet'}
 files = {}
@@ -3915,7 +3728,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/automaticDeployer',
   'headers': {
   }
@@ -3952,7 +3765,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/automaticDeployer",
+  CURLOPT_URL => "api.mycontract.co:3001/api/automaticDeployer",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -3990,7 +3803,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/automaticDeployer"
+  url := "api.mycontract.co:3001/api/automaticDeployer"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -4020,14 +3833,6 @@ func main() {
   fmt.Println(string(body))
 }
 ```
-> The above command returns JSON structured like this:
-
-```json
-{
- "coinName": "Demo",
- "network": "testnet" 
-}
-```
 
 
 
@@ -4041,10 +3846,10 @@ network | String | yes
 
 ## Project Contract Data
 
-`POST http://api.mycontract.co/api/projectContractData`
+`POST http://api.mycontract.co:3001/api/projectContractData`
 
 ```shell
-curl --location --request POST "api.mycontract.co/api/projectContractData" \
+curl --location --request POST "api.mycontract.co:3001/api/projectContractData" \
   --form "tokenName=Demo"
   ```
 
@@ -4052,7 +3857,7 @@ curl --location --request POST "api.mycontract.co/api/projectContractData" \
   require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/api/projectContractData")
+url = URI("api.mycontract.co:3001/api/projectContractData")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -4066,7 +3871,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/api/projectContractData'
+url = 'api.mycontract.co:3001/api/projectContractData'
 payload = {'tokenName': 'Demo'}
 files = {}
 headers = {}
@@ -4079,7 +3884,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/projectContractData',
   'headers': {
   }
@@ -4116,7 +3921,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/projectContractData",
+  CURLOPT_URL => "api.mycontract.co:3001/api/projectContractData",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -4153,7 +3958,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/projectContractData"
+  url := "api.mycontract.co:3001/api/projectContractData"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -4183,11 +3988,7 @@ func main() {
 ```
 > The above command returns JSON structured like this:
 
-```json
-{
-  "tokenName": "Demo"
-}
-```
+
 
 ### Query Parameters
 
@@ -4200,17 +4001,17 @@ tokenName | String | yes
 
 ## Get Site Configuration
 
-`GET http://api.mycontract.co/api/siteConfiguration/project/Demo/getSiteConfiguration`
+`GET http://api.mycontract.co:3001/api/siteConfiguration/project/Demo/getSiteConfiguration`
 
 ```shell
-curl --location --request GET "api.mycontract.co/api/siteConfiguration/project/Demo/getSiteConfiguration"
+curl --location --request GET "api.mycontract.co:3001/api/siteConfiguration/project/Demo/getSiteConfiguration"
 
 ```
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/api/siteConfiguration/project/Demo/getSiteConfiguration")
+url = URI("api.mycontract.co:3001/api/siteConfiguration/project/Demo/getSiteConfiguration")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -4221,7 +4022,7 @@ puts response.read_body
 ```
 ```python
 requests
-url = 'api.mycontract.co/api/siteConfiguration/project/Demo/getSiteConfiguration'
+url = 'api.mycontract.co:3001/api/siteConfiguration/project/Demo/getSiteConfiguration'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -4232,7 +4033,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/siteConfiguration/project/Demo/getSiteConfiguration',
   'headers': {
   }
@@ -4263,7 +4064,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/siteConfiguration/project/Demo/getSiteConfiguration",
+  CURLOPT_URL => "api.mycontract.co:3001/api/siteConfiguration/project/Demo/getSiteConfiguration",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -4297,7 +4098,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/siteConfiguration/project/Demo/getSiteConfiguration"
+  url := "api.mycontract.co:3001/api/siteConfiguration/project/Demo/getSiteConfiguration"
   method := "GET"
 
   client := &http.Client {
@@ -4318,13 +4119,7 @@ func main() {
 }
 ```
 
-> The above command returns JSON structured like this:
-
-```json
-{
-  "tokenName": "Demo"
-}
-```
+  
 
 
 
@@ -4338,17 +4133,17 @@ tokenName | String | yes
 
 ## Update Site Configuration
 
-`POST http://api.mycontract.co/api/siteConfiguration/project/Demo/updateSiteConfiguration`
+`POST http://api.mycontract.co:3001/api/siteConfiguration/project/Demo/updateSiteConfiguration`
 
 ```shell
-curl --location --request POST "api.mycontract.co/api/siteConfiguration/project/Demo/updateSiteConfiguration" \
+curl --location --request POST "api.mycontract.co:3001/api/siteConfiguration/project/Demo/updateSiteConfiguration" \
   --form "siteLogo=@" \
   --form "siteName=Demo" \
   --form "softCap=100" \
   --form "hardCap=9000" \
   --form "startDate=2018-12-16 19:55:36.614+05:30" \
   --form "endDate=2018-12-26 19:55:36.614+05:30" \
-  --form "homeURL=www.api.mycontract.co" \
+  --form "homeURL=www.api.mycontract.co:3001" \
   --form "minimumContribution=2"
   ```
   ```ruby
@@ -4356,26 +4151,26 @@ curl --location --request POST "api.mycontract.co/api/siteConfiguration/project/
   require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/api/siteConfiguration/project/Demo/updateSiteConfiguration")
+url = URI("api.mycontract.co:3001/api/siteConfiguration/project/Demo/updateSiteConfiguration")
 
 http = Net::HTTP.new(url.host, url.port)
 
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
-request.body = "\"siteLogo\"' = '')------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"siteName\"\r\n\r\nDemo\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"softCap\"\r\n\r\n100\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"hardCap\"\r\n\r\n9000\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"startDate\"\r\n\r\n2018-12-16 19:55:36.614+05:30\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"endDate\"\r\n\r\n2018-12-26 19:55:36.614+05:30\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"homeURL\"\r\n\r\nwww.api.mycontract.co\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"minimumContribution\"\r\n\r\n2\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"
+request.body = "\"siteLogo\"' = '')------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"siteName\"\r\n\r\nDemo\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"softCap\"\r\n\r\n100\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"hardCap\"\r\n\r\n9000\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"startDate\"\r\n\r\n2018-12-16 19:55:36.614+05:30\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"endDate\"\r\n\r\n2018-12-26 19:55:36.614+05:30\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"homeURL\"\r\n\r\nwww.api.mycontract.co:3001\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"minimumContribution\"\r\n\r\n2\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"
 
 response = http.request(request)
 puts response.read_body
 ```
 ```python
  import requests
-url = 'api.mycontract.co/api/siteConfiguration/project/Demo/updateSiteConfiguration'
+url = 'api.mycontract.co:3001/api/siteConfiguration/project/Demo/updateSiteConfiguration'
 payload = {'siteName': 'Demo',
 'softCap': '100',
 'hardCap': '9000',
 'startDate': '2018-12-16 19:55:36.614+05:30',
 'endDate': '2018-12-26 19:55:36.614+05:30',
-'homeURL': 'www.api.mycontract.co',
+'homeURL': 'www.api.mycontract.co:3001',
 'minimumContribution': '2'}
 files = {('siteLogo': open('','rb')}
 headers = {}
@@ -4387,7 +4182,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/siteConfiguration/project/Demo/updateSiteConfiguration',
   'headers': {
   }
@@ -4410,7 +4205,7 @@ var req = https.request(options, function (res) {
   });
 });
 
-var postData = "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"siteLogo\"; filename=\"{Insert_File_Name}\"\r\nContent-Type: \"{Insert_File_Content_Type}\"\r\n\r\n{Insert_File_Content}\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"siteName\"\r\n\r\nDemo\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"softCap\"\r\n\r\n100\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"hardCap\"\r\n\r\n9000\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"startDate\"\r\n\r\n2018-12-16 19:55:36.614+05:30\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"endDate\"\r\n\r\n2018-12-26 19:55:36.614+05:30\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"homeURL\"\r\n\r\nwww.api.mycontract.co\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"minimumContribution\"\r\n\r\n2\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--";
+var postData = "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"siteLogo\"; filename=\"{Insert_File_Name}\"\r\nContent-Type: \"{Insert_File_Content_Type}\"\r\n\r\n{Insert_File_Content}\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"siteName\"\r\n\r\nDemo\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"softCap\"\r\n\r\n100\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"hardCap\"\r\n\r\n9000\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"startDate\"\r\n\r\n2018-12-16 19:55:36.614+05:30\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"endDate\"\r\n\r\n2018-12-26 19:55:36.614+05:30\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"homeURL\"\r\n\r\nwww.api.mycontract.co:3001\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"minimumContribution\"\r\n\r\n2\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--";
 
 req.setHeader('content-type', 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW');
 
@@ -4425,7 +4220,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/siteConfiguration/project/Demo/updateSiteConfiguration",
+  CURLOPT_URL => "api.mycontract.co:3001/api/siteConfiguration/project/Demo/updateSiteConfiguration",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -4433,7 +4228,7 @@ curl_setopt_array($curl, array(
   CURLOPT_FOLLOWLOCATION => false,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => array('siteLogo'=> new CURLFILE(''),'siteName' => 'Demo','softCap' => '100','hardCap' => '9000','startDate' => '2018-12-16 19:55:36.614+05:30','endDate' => '2018-12-26 19:55:36.614+05:30','homeURL' => 'www.api.mycontract.co','minimumContribution' => '2'),
+  CURLOPT_POSTFIELDS => array('siteLogo'=> new CURLFILE(''),'siteName' => 'Demo','softCap' => '100','hardCap' => '9000','startDate' => '2018-12-16 19:55:36.614+05:30','endDate' => '2018-12-26 19:55:36.614+05:30','homeURL' => 'www.api.mycontract.co:3001','minimumContribution' => '2'),
 ));
 
 $response = curl_exec($curl);
@@ -4463,7 +4258,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/siteConfiguration/project/Demo/updateSiteConfiguration"
+  url := "api.mycontract.co:3001/api/siteConfiguration/project/Demo/updateSiteConfiguration"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -4478,7 +4273,7 @@ func main() {
   _ = writer.WriteField("hardCap", "9000")
   _ = writer.WriteField("startDate", "2018-12-16 19:55:36.614+05:30")
   _ = writer.WriteField("endDate", "2018-12-26 19:55:36.614+05:30")
-  _ = writer.WriteField("homeURL", "www.api.mycontract.co")
+  _ = writer.WriteField("homeURL", "www.api.mycontract.co:3001")
   _ = writer.WriteField("minimumContribution", "2")
   err := writer.Close()
   if err != nil {  fmt.Println(err)}
@@ -4502,20 +4297,6 @@ func main() {
   fmt.Println(string(body))
 }
 ```
-> The above command returns JSON structured like this:
-
-```json
-{
-  "siteLogo": "",
-  "siteName": "Demo",
-  "softCap": "100",
-  "hardCap": "900",
-  "startDate": "2018-12-16 19:55:36.614+05:30",
-  "endDate": "2018-12-26 19:55:36.614+05:30",
-  "homeURL": "",
-  "minimumContribution": ""
-}
-```
 
 
 
@@ -4537,17 +4318,17 @@ minimumContribution | Number | yes
 
 ## Get All Transactions
 
-`GET http://api.mycontract.co/transaction/project/demo`
+`GET http://api.mycontract.co:3001/transaction/project/demo`
 
 ```shell
-curl --location --request GET "api.mycontract.co/transaction/project/demo"
+curl --location --request GET "api.mycontract.co:3001/transaction/project/demo"
 
 ```
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/transaction/project/demo")
+url = URI("api.mycontract.co:3001/transaction/project/demo")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -4558,7 +4339,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/transaction/project/demo'
+url = 'api.mycontract.co:3001/transaction/project/demo'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -4570,7 +4351,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/transaction/project/demo',
   'headers': {
   }
@@ -4603,7 +4384,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/transaction/project/demo",
+  CURLOPT_URL => "api.mycontract.co:3001/transaction/project/demo",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -4638,7 +4419,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/transaction/project/demo"
+  url := "api.mycontract.co:3001/transaction/project/demo"
   method := "GET"
 
   client := &http.Client {
@@ -4662,11 +4443,11 @@ func main() {
 
 ## Get All ICO User Data
 
-`GET http://api.mycontract.co/api/icoDashboardSetup/project/Demo/kyctab/getICOUsersData`
+`GET http://api.mycontract.co:3001/api/icoDashboardSetup/project/Demo/kyctab/getICOUsersData`
 
 ```shell
 
-curl --location --request GET "api.mycontract.co/icoDashboardSetup/project/Demo/kyctab/getICOUsersData"
+curl --location --request GET "api.mycontract.co:3001/icoDashboardSetup/project/Demo/kyctab/getICOUsersData"
 ```
 
 ```ruby
@@ -4674,7 +4455,7 @@ curl --location --request GET "api.mycontract.co/icoDashboardSetup/project/Demo/
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/icoDashboardSetup/project/Demo/kyctab/getICOUsersData")
+url = URI("api.mycontract.co:3001/icoDashboardSetup/project/Demo/kyctab/getICOUsersData")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -4688,7 +4469,7 @@ puts response.read_body
 ```python
 
 import requests
-url = 'api.mycontract.co/icoDashboardSetup/project/Demo/kyctab/getICOUsersData'
+url = 'api.mycontract.co:3001/icoDashboardSetup/project/Demo/kyctab/getICOUsersData'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -4701,7 +4482,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/icoDashboardSetup/project/Demo/kyctab/getICOUsersData',
   'headers': {
   }
@@ -4732,7 +4513,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/icoDashboardSetup/project/Demo/kyctab/getICOUsersData",
+  CURLOPT_URL => "api.mycontract.co:3001/icoDashboardSetup/project/Demo/kyctab/getICOUsersData",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -4768,7 +4549,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/icoDashboardSetup/project/Demo/kyctab/getICOUsersData"
+  url := "api.mycontract.co:3001/icoDashboardSetup/project/Demo/kyctab/getICOUsersData"
   method := "GET"
 
   client := &http.Client {
@@ -4792,16 +4573,16 @@ func main() {
 
 ## Get Single User Data
 
-`GET http://api.mycontract.co/api/icoDashboardSetup/project/Demo/userId/123/getUserData`
+`GET http://api.mycontract.co:3001/api/icoDashboardSetup/project/Demo/userId/123/getUserData`
 
 ```shell
-curl --location --request GET "api.mycontract.co/icoDashboardSetup/project/Demo/userId/123/getUserData"
+curl --location --request GET "api.mycontract.co:3001/icoDashboardSetup/project/Demo/userId/123/getUserData"
 ```
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/icoDashboardSetup/project/Demo/userId/123/getUserData")
+url = URI("api.mycontract.co:3001/icoDashboardSetup/project/Demo/userId/123/getUserData")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -4812,7 +4593,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/icoDashboardSetup/project/Demo/userId/123/getUserData'
+url = 'api.mycontract.co:3001/icoDashboardSetup/project/Demo/userId/123/getUserData'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -4824,7 +4605,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/icoDashboardSetup/project/Demo/userId/123/getUserData',
   'headers': {
   }
@@ -4857,7 +4638,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/icoDashboardSetup/project/Demo/userId/123/getUserData",
+  CURLOPT_URL => "api.mycontract.co:3001/icoDashboardSetup/project/Demo/userId/123/getUserData",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -4892,7 +4673,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/icoDashboardSetup/project/Demo/userId/123/getUserData"
+  url := "api.mycontract.co:3001/icoDashboardSetup/project/Demo/userId/123/getUserData"
   method := "GET"
 
   client := &http.Client {
@@ -4917,10 +4698,10 @@ func main() {
 
 ## Update Single User Data
 
-`POST http://api.mycontract.co/api/icoDashboardSetup/project/Demo/userId/123/updateUserData`
+`POST http://api.mycontract.co:3001/api/icoDashboardSetup/project/Demo/userId/123/updateUserData`
 
 ```shell
-curl --location --request POST "api.mycontract.co/icoDashboardSetup/project/Demo/userId/123/updateUserData" \
+curl --location --request POST "api.mycontract.co:3001/icoDashboardSetup/project/Demo/userId/123/updateUserData" \
   --form "kycStatus=true" \
   --form "accountStatus=true"
   ```
@@ -4929,7 +4710,7 @@ curl --location --request POST "api.mycontract.co/icoDashboardSetup/project/Demo
   require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/icoDashboardSetup/project/Demo/userId/123/updateUserData")
+url = URI("api.mycontract.co:3001/icoDashboardSetup/project/Demo/userId/123/updateUserData")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -4943,7 +4724,7 @@ puts response.read_body
 
 ```python
 import requests
-url = 'api.mycontract.co/icoDashboardSetup/project/Demo/userId/123/updateUserData'
+url = 'api.mycontract.co:3001/icoDashboardSetup/project/Demo/userId/123/updateUserData'
 payload = {'kycStatus': 'true',
 'accountStatus': 'true'}
 files = {}
@@ -4957,7 +4738,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/icoDashboardSetup/project/Demo/userId/123/updateUserData',
   'headers': {
   }
@@ -4994,7 +4775,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/icoDashboardSetup/project/Demo/userId/123/updateUserData",
+  CURLOPT_URL => "api.mycontract.co:3001/icoDashboardSetup/project/Demo/userId/123/updateUserData",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -5032,7 +4813,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/icoDashboardSetup/project/Demo/userId/123/updateUserData"
+  url := "api.mycontract.co:3001/icoDashboardSetup/project/Demo/userId/123/updateUserData"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -5088,16 +4869,16 @@ accountStatus | String | yes
 
 ## project information
 
-`GET http://api.mycontract.co/api/icoDashboardSetup/project/Demo`
+`GET http://api.mycontract.co:3001/api/icoDashboardSetup/project/Demo`
 
 ```shell
-curl --location --request GET "api.mycontract.co/api/icoDashboardSetup/project/Demo"
+curl --location --request GET "api.mycontract.co:3001/api/icoDashboardSetup/project/Demo"
 ```
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/api/icoDashboardSetup/project/Demo")
+url = URI("api.mycontract.co:3001/api/icoDashboardSetup/project/Demo")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -5110,7 +4891,7 @@ puts response.read_body
 
 ```python
 import requests
-url = 'api.mycontract.co/api/icoDashboardSetup/project/Demo'
+url = 'api.mycontract.co:3001/api/icoDashboardSetup/project/Demo'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -5124,7 +4905,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/api/icoDashboardSetup/project/Demo',
   'headers': {
   }
@@ -5158,7 +4939,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/api/icoDashboardSetup/project/Demo",
+  CURLOPT_URL => "api.mycontract.co:3001/api/icoDashboardSetup/project/Demo",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -5193,7 +4974,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/api/icoDashboardSetup/project/Demo"
+  url := "api.mycontract.co:3001/api/icoDashboardSetup/project/Demo"
   method := "GET"
 
   client := &http.Client {
@@ -5216,10 +4997,10 @@ func main() {
 
 ## Token Transfer
 
-`POST http://api.mycontract.co/api/icoDashboard/transaction/project/demo/tokenTrasfer`
+`POST http://api.mycontract.co:3001/api/icoDashboard/transaction/project/demo/tokenTrasfer`
 
 ```shell
-curl --location --request POST "api.mycontract.co/icoDashboard/transaction/project/demo/tokenTrasfer" \
+curl --location --request POST "api.mycontract.co:3001/icoDashboard/transaction/project/demo/tokenTrasfer" \
   --form "tokenAmount=1000" \
   --form "tokenAddress=0xF6409e8113a70830996eD62F552316958A658ef4"
 ```
@@ -5228,7 +5009,7 @@ curl --location --request POST "api.mycontract.co/icoDashboard/transaction/proje
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/icoDashboard/transaction/project/demo/tokenTrasfer")
+url = URI("api.mycontract.co:3001/icoDashboard/transaction/project/demo/tokenTrasfer")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -5243,7 +5024,7 @@ puts response.read_body
 ```python
 
 import requests
-url = 'api.mycontract.co/icoDashboard/transaction/project/demo/tokenTrasfer'
+url = 'api.mycontract.co:3001/icoDashboard/transaction/project/demo/tokenTrasfer'
 payload = {'tokenAmount': '1000',
 'tokenAddress': '0xF6409e8113a70830996eD62F552316958A658ef4'}
 files = {}
@@ -5257,7 +5038,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/icoDashboard/transaction/project/demo/tokenTrasfer',
   'headers': {
   }
@@ -5294,7 +5075,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/icoDashboard/transaction/project/demo/tokenTrasfer",
+  CURLOPT_URL => "api.mycontract.co:3001/icoDashboard/transaction/project/demo/tokenTrasfer",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -5331,7 +5112,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/icoDashboard/transaction/project/demo/tokenTrasfer"
+  url := "api.mycontract.co:3001/icoDashboard/transaction/project/demo/tokenTrasfer"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -5364,16 +5145,6 @@ func main() {
 
 
 
-> The above command returns JSON structured like this:
-
-```json
-{
-  "tokenAmount": "1000",
-  "tokenAddress": "0xF6409e8113a70830996eD62F552316958A658ef4"
-}
-```
-
-
 
 
 ### Query Parameters
@@ -5385,10 +5156,10 @@ tokenAddress | String | yes
 
 ## pending Transaction Transfer
 
-`GET http://api.mycontract.co/api/icoDashboard/transaction/project/demo/initiateTransferReq`
+`GET http://api.mycontract.co:3001/api/icoDashboard/transaction/project/demo/initiateTransferReq`
 
 ```shell
-curl --location --request POST "api.mycontract.co/icoDashboard/transaction/project/Demo/initiateTransferReq" \
+curl --location --request POST "api.mycontract.co:3001/icoDashboard/transaction/project/Demo/initiateTransferReq" \
   --header "Content-Type: application/json" \
   --data "{\"transactionId\":[\"e66d1f20-08d8-11e9-9b07-8da6f2c251c1\",\"03e55f40-08d9-11e9-9b07-8da6f2c251c1\"]}"
 
@@ -5397,7 +5168,7 @@ curl --location --request POST "api.mycontract.co/icoDashboard/transaction/proje
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/icoDashboard/transaction/project/Demo/initiateTransferReq")
+url = URI("api.mycontract.co:3001/icoDashboard/transaction/project/Demo/initiateTransferReq")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -5411,7 +5182,7 @@ puts response.read_body
 
 ```python
 import requests
-url = 'api.mycontract.co/icoDashboard/transaction/project/Demo/initiateTransferReq'
+url = 'api.mycontract.co:3001/icoDashboard/transaction/project/Demo/initiateTransferReq'
 payload = "{\"transactionId\":[\"e66d1f20-08d8-11e9-9b07-8da6f2c251c1\",\"03e55f40-08d9-11e9-9b07-8da6f2c251c1\"]}"
 headers = {
   'Content-Type': 'application/json'
@@ -5427,7 +5198,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/icoDashboard/transaction/project/Demo/initiateTransferReq',
   'headers': {
     'Content-Type': 'application/json'
@@ -5465,7 +5236,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/icoDashboard/transaction/project/Demo/initiateTransferReq",
+  CURLOPT_URL => "api.mycontract.co:3001/icoDashboard/transaction/project/Demo/initiateTransferReq",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -5505,7 +5276,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/icoDashboard/transaction/project/Demo/initiateTransferReq"
+  url := "api.mycontract.co:3001/icoDashboard/transaction/project/Demo/initiateTransferReq"
   method := "POST"
 
   payload := strings.NewReader("{\"transactionId\":[\"e66d1f20-08d8-11e9-9b07-8da6f2c251c1\",\"03e55f40-08d9-11e9-9b07-8da6f2c251c1\"]}")
@@ -5533,13 +5304,7 @@ func main() {
 
 
 
-> The above command returns JSON structured like this:
 
-```json
-{
-  "Content-Type": "application/json"
-}
-```
 
 
 
@@ -5555,10 +5320,10 @@ contentType | String | yes
 
 ##User Signup
 
-`POST http://api.mycontract.co/Demo/userSignup`
+`POST http://api.mycontract.co:3001/Demo/userSignup`
 
 ```shell
-curl --location --request POST "api.mycontract.co/Demo/userSignup" \
+curl --location --request POST "api.mycontract.co:3001/Demo/userSignup" \
   --form "email=abc@gmail.com" \
   --form "password=123456" \
   --form "firstName=abc" \
@@ -5572,7 +5337,7 @@ curl --location --request POST "api.mycontract.co/Demo/userSignup" \
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/Demo/userSignup")
+url = URI("api.mycontract.co:3001/Demo/userSignup")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -5587,7 +5352,7 @@ puts response.read_body
 
 ```python
 import requests
-url = 'api.mycontract.co/Demo/userSignup'
+url = 'api.mycontract.co:3001/Demo/userSignup'
 payload = {'email': 'abc@gmail.com',
 'password': '123456',
 'firstName': 'abc',
@@ -5607,7 +5372,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/Demo/userSignup',
   'headers': {
   }
@@ -5645,7 +5410,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/Demo/userSignup",
+  CURLOPT_URL => "api.mycontract.co:3001/Demo/userSignup",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -5684,7 +5449,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/Demo/userSignup"
+  url := "api.mycontract.co:3001/Demo/userSignup"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -5718,18 +5483,6 @@ func main() {
 }
 
 ```
-> The above command returns JSON structured like this:
-
-```json
-{
-  "email": "abc@gmail.com",
-  "password": "123456",
-  "firstName": "abc",
-  "lastName": "def",
-  "countryId": "india",
-  "projectName": "Demo",
-}
-```
 
 
 
@@ -5748,10 +5501,10 @@ projectName | String | yes
 
 ## User Login
 
-`POST http://api.mycontract.co/Demo/userLogin`
+`POST http://api.mycontract.co:3001/Demo/userLogin`
 
 ```shell
-curl --location --request POST "api.mycontract.co/Demo/userLogin" \
+curl --location --request POST "api.mycontract.co:3001/Demo/userLogin" \
   --form "email=abc@gmail.com" \
   --form "password=123456" \
   --form "projectName=Demo"
@@ -5761,7 +5514,7 @@ curl --location --request POST "api.mycontract.co/Demo/userLogin" \
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/Demo/userLogin")
+url = URI("api.mycontract.co:3001/Demo/userLogin")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -5777,7 +5530,7 @@ puts response.read_body
 
 ```python
 import requests
-url = 'api.mycontract.co/Demo/userLogin'
+url = 'api.mycontract.co:3001/Demo/userLogin'
 payload = {'email': 'abc@gmail.com',
 'password': '123456',
 'projectName': 'Demo'}
@@ -5793,7 +5546,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/Demo/userLogin',
   'headers': {
   }
@@ -5831,7 +5584,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/Demo/userLogin",
+  CURLOPT_URL => "api.mycontract.co:3001/Demo/userLogin",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -5869,7 +5622,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/Demo/userLogin"
+  url := "api.mycontract.co:3001/Demo/userLogin"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -5907,15 +5660,6 @@ func main() {
 
 
 
-> The above command returns JSON structured like this:
-
-```json
-{
-  "email": "abc@gmail.com",
-  "password": "123456",
-  "projectName": "Demo"
-}
-```
 
 
 
@@ -5932,10 +5676,10 @@ projectName | String | yes
 
 ## KYC Upload
 
-`POST http://api.mycontract.co/Demo/user/kycUpload`
+`POST http://api.mycontract.co:3001/Demo/user/kycUpload`
 
 ```shell
-curl --location --request POST "api.mycontract.co/Demo/user/kycUpload" \
+curl --location --request POST "api.mycontract.co:3001/Demo/user/kycUpload" \
   --form "email=abc@gmail.com" \
   --form "isdCode=+91" \
   --form "contactNumber=98" \
@@ -5951,7 +5695,7 @@ curl --location --request POST "api.mycontract.co/Demo/user/kycUpload" \
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/Demo/user/kycUpload")
+url = URI("api.mycontract.co:3001/Demo/user/kycUpload")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -5965,7 +5709,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/Demo/user/kycUpload'
+url = 'api.mycontract.co:3001/Demo/user/kycUpload'
 payload = {'email': 'abc@gmail.com',
 'isdCode': '+91',
 'contactNumber': '98',
@@ -5985,7 +5729,7 @@ var https = require('https');
 
 var options = {
   'method': 'POST',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/Demo/user/kycUpload',
   'headers': {
   }
@@ -6023,7 +5767,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/Demo/user/kycUpload",
+  CURLOPT_URL => "api.mycontract.co:3001/Demo/user/kycUpload",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -6061,7 +5805,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/Demo/user/kycUpload"
+  url := "api.mycontract.co:3001/Demo/user/kycUpload"
   method := "POST"
 
   payload := &bytes.Buffer{}
@@ -6119,24 +5863,6 @@ func main() {
 
 
 
-> The above command returns JSON structured like this:
-
-```json
-{
-  "email": "abc@gmail.com",
-  "isdCode": "+91",
-  "contactNumber": "02224565",
-  "country": "India",
-  "kycDocName1": "passport",
-  "kycDoc1": "",
-   "kycDocName2": "official Id",
-  "kycDoc2": "",
-   "kycDocName3": "official Id",
-  "kycDoc3": ""
-  }
-```
-
-
 
 
 ### Query Parameters
@@ -6157,16 +5883,16 @@ kycDoc3 | String | yes
 
 ## Get Dashboard Data
 
-`GET http://api.mycontract.co/Demo/user/dashboard`
+`GET http://api.mycontract.co:3001/Demo/user/dashboard`
 
 ```shell
-curl --location --request GET "api.mycontract.co/Demo/user/dashboard"
+curl --location --request GET "api.mycontract.co:3001/Demo/user/dashboard"
 ```
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/Demo/user/dashboard")
+url = URI("api.mycontract.co:3001/Demo/user/dashboard")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -6178,7 +5904,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/Demo/user/dashboard'
+url = 'api.mycontract.co:3001/Demo/user/dashboard'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -6192,7 +5918,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/Demo/user/dashboard',
   'headers': {
   }
@@ -6224,7 +5950,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/Demo/user/dashboard",
+  CURLOPT_URL => "api.mycontract.co:3001/Demo/user/dashboard",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -6259,7 +5985,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/Demo/user/dashboard"
+  url := "api.mycontract.co:3001/Demo/user/dashboard"
   method := "GET"
 
   client := &http.Client {
@@ -6284,17 +6010,17 @@ func main() {
 
 ## Get Prices
 
-`POST http://api.mycontract.co/Demo/user/getPrices`
+`POST http://api.mycontract.co:3001/Demo/user/getPrices`
 
 ```shell
 shell
-curl --location --request GET "api.mycontract.co/Demo/user/getPrices"
+curl --location --request GET "api.mycontract.co:3001/Demo/user/getPrices"
 ```
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/Demo/user/getPrices")
+url = URI("api.mycontract.co:3001/Demo/user/getPrices")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -6307,7 +6033,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/Demo/user/getPrices'
+url = 'api.mycontract.co:3001/Demo/user/getPrices'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -6320,7 +6046,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/Demo/user/getPrices',
   'headers': {
   }
@@ -6354,7 +6080,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/Demo/user/getPrices",
+  CURLOPT_URL => "api.mycontract.co:3001/Demo/user/getPrices",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -6389,7 +6115,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/Demo/user/getPrices"
+  url := "api.mycontract.co:3001/Demo/user/getPrices"
   method := "GET"
 
   client := &http.Client {
@@ -6415,17 +6141,17 @@ func main() {
 
 ## Check Balances
 
-`POST http://api.mycontract.co/Demo/user/api/checkBalances`
+`POST http://api.mycontract.co:3001/Demo/user/api/checkBalances`
 
 ```shell
-curl --location --request GET "api.mycontract.co/Demo/user/api/checkBalances"
+curl --location --request GET "api.mycontract.co:3001/Demo/user/api/checkBalances"
 
 ```
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/Demo/user/api/checkBalances")
+url = URI("api.mycontract.co:3001/Demo/user/api/checkBalances")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -6438,7 +6164,7 @@ puts response.read_body
 ```python
 
 import requests
-url = 'api.mycontract.co/Demo/user/api/checkBalances'
+url = 'api.mycontract.co:3001/Demo/user/api/checkBalances'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -6452,7 +6178,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/Demo/user/api/checkBalances',
   'headers': {
   }
@@ -6484,7 +6210,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/Demo/user/api/checkBalances",
+  CURLOPT_URL => "api.mycontract.co:3001/Demo/user/api/checkBalances",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -6519,7 +6245,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/Demo/user/api/checkBalances"
+  url := "api.mycontract.co:3001/Demo/user/api/checkBalances"
   method := "GET"
 
   client := &http.Client {
@@ -6549,16 +6275,16 @@ func main() {
 
 ## Check Token Balances
 
-`POST http://api.mycontract.co/Demo/user/api/checkTokenBalances`
+`POST http://api.mycontract.co:3001/Demo/user/api/checkTokenBalances`
 
 ```shell
-curl --location --request GET "api.mycontract.co/Demo/user/api/checkTokenBalances"
+curl --location --request GET "api.mycontract.co:3001/Demo/user/api/checkTokenBalances"
 ```
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/Demo/user/api/checkTokenBalances")
+url = URI("api.mycontract.co:3001/Demo/user/api/checkTokenBalances")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -6569,7 +6295,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/Demo/user/api/checkTokenBalances'
+url = 'api.mycontract.co:3001/Demo/user/api/checkTokenBalances'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -6582,7 +6308,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/Demo/user/api/checkTokenBalances',
   'headers': {
   }
@@ -6614,7 +6340,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/Demo/user/api/checkTokenBalances",
+  CURLOPT_URL => "api.mycontract.co:3001/Demo/user/api/checkTokenBalances",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -6649,7 +6375,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/Demo/user/api/checkTokenBalances"
+  url := "api.mycontract.co:3001/Demo/user/api/checkTokenBalances"
   method := "GET"
 
   client := &http.Client {
@@ -6676,16 +6402,16 @@ func main() {
 
 ## Get Transaction Log
 
-`POST http://api.mycontract.co/Demo/user/api/getTransactions`
+`POST http://api.mycontract.co:3001/Demo/user/api/getTransactions`
 
 ```shell
-curl --location --request GET "api.mycontract.co/Demo/user/api/getTransactions"
+curl --location --request GET "api.mycontract.co:3001/Demo/user/api/getTransactions"
 ```
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/Demo/user/api/getTransactions")
+url = URI("api.mycontract.co:3001/Demo/user/api/getTransactions")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -6696,7 +6422,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/Demo/user/api/getTransactions'
+url = 'api.mycontract.co:3001/Demo/user/api/getTransactions'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -6709,7 +6435,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/Demo/user/api/getTransactions',
   'headers': {
   }
@@ -6741,7 +6467,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/Demo/user/api/getTransactions",
+  CURLOPT_URL => "api.mycontract.co:3001/Demo/user/api/getTransactions",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -6776,7 +6502,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/Demo/user/api/getTransactions"
+  url := "api.mycontract.co:3001/Demo/user/api/getTransactions"
   method := "GET"
 
   client := &http.Client {
@@ -6804,15 +6530,15 @@ func main() {
 
 ## Get Bitcoin Transaction Log
 
-`POST http://api.mycontract.co/Demo/user/api/getBitcoinTransactions`
+`POST http://api.mycontract.co:3001/Demo/user/api/getBitcoinTransactions`
 ```shell
-curl --location --request GET "api.mycontract.co/Demo/user/api/getBitcoinTransactions"
+curl --location --request GET "api.mycontract.co:3001/Demo/user/api/getBitcoinTransactions"
 ```
 ```ruby
 require "uri"
 require "net/http"
 
-url = URI("api.mycontract.co/Demo/user/api/getBitcoinTransactions")
+url = URI("api.mycontract.co:3001/Demo/user/api/getBitcoinTransactions")
 
 http = Net::HTTP.new(url.host, url.port)
 
@@ -6824,7 +6550,7 @@ puts response.read_body
 ```
 ```python
 import requests
-url = 'api.mycontract.co/Demo/user/api/getBitcoinTransactions'
+url = 'api.mycontract.co:3001/Demo/user/api/getBitcoinTransactions'
 payload = {}
 headers = {}
 response = requests.request('GET', url, headers = headers, data = payload, allow_redirects=False, timeout=undefined, allow_redirects=false)
@@ -6837,7 +6563,7 @@ var https = require('https');
 
 var options = {
   'method': 'GET',
-  'hostname': 'api.mycontract.co',
+  'hostname': 'api.mycontract.co:3001',
   'path': '/Demo/user/api/getBitcoinTransactions',
   'headers': {
   }
@@ -6869,7 +6595,7 @@ req.end();
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "api.mycontract.co/Demo/user/api/getBitcoinTransactions",
+  CURLOPT_URL => "api.mycontract.co:3001/Demo/user/api/getBitcoinTransactions",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -6904,7 +6630,7 @@ import (
 
 func main() {
 
-  url := "api.mycontract.co/Demo/user/api/getBitcoinTransactions"
+  url := "api.mycontract.co:3001/Demo/user/api/getBitcoinTransactions"
   method := "GET"
 
   client := &http.Client {
